@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Unit Test,Stub," />
 
 
 
@@ -84,15 +84,28 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yu's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="在测试中，如果因为代码对外部资源存在依赖的行为，尽管代码的逻辑是正确的也会存在测试失败的可能性，这也被称为test-inhibiting
+
+常见的external dependency是系统中的一个对象，被测试的代码需要与这个对象进行交互，但是你并不能去控制这个对象的行为。
+
+而stub则是对于系统的external dependency的可控制的替代物。stub带来的效果就是可以在测试代码中无需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用stub破除external dependency">
+<meta property="og:url" content="http://yoursite.com/2016/03/17/使用stub破除external dependency/index.html">
 <meta property="og:site_name" content="Yu's Blog">
-<meta property="og:description">
+<meta property="og:description" content="在测试中，如果因为代码对外部资源存在依赖的行为，尽管代码的逻辑是正确的也会存在测试失败的可能性，这也被称为test-inhibiting
+
+常见的external dependency是系统中的一个对象，被测试的代码需要与这个对象进行交互，但是你并不能去控制这个对象的行为。
+
+而stub则是对于系统的external dependency的可控制的替代物。stub带来的效果就是可以在测试代码中无需">
+<meta property="og:updated_time" content="2016-05-25T09:32:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yu's Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="使用stub破除external dependency">
+<meta name="twitter:description" content="在测试中，如果因为代码对外部资源存在依赖的行为，尽管代码的逻辑是正确的也会存在测试失败的可能性，这也被称为test-inhibiting
+
+常见的external dependency是系统中的一个对象，被测试的代码需要与这个对象进行交互，但是你并不能去控制这个对象的行为。
+
+而stub则是对于系统的external dependency的可控制的替代物。stub带来的效果就是可以在测试代码中无需">
 
 
 
@@ -110,7 +123,7 @@
   };
 </script>
 
-  <title> Yu's Blog </title>
+  <title> 使用stub破除external dependency | Yu's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -141,9 +154,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -220,9 +231,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -242,119 +253,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/05/16/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-16T17:22:22+08:00" content="2016-05-16">
-              2016-05-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/16/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/16/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/17/使用stub破除external dependency/" itemprop="url">
-                  使用stub破除external dependency
-                </a>
+                使用stub破除external dependency
               
             
           </h1>
@@ -401,9 +300,7 @@
       
 
       
-        
-          
-            <p>在测试中，如果因为代码对外部资源存在依赖的行为，尽管代码的逻辑是正确的也会存在测试失败的可能性，这也被称为<strong>test-inhibiting</strong></p>
+        <p>在测试中，如果因为代码对外部资源存在依赖的行为，尽管代码的逻辑是正确的也会存在测试失败的可能性，这也被称为<strong>test-inhibiting</strong></p>
 <ul>
 <li><p>常见的<strong><em>external dependency</em></strong>是系统中的一个对象，被测试的代码需要与这个对象进行交互，但是你并不能去控制这个对象的行为。</p>
 </li>
@@ -478,36 +375,60 @@
 </li>
 </ul>
 
-          
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Unit-Test/" rel="tag">#Unit Test</a>
+          
+            <a href="/tags/Stub/" rel="tag">#Stub</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/16/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -515,6 +436,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/17/使用stub破除external dependency/"
+           data-title="使用stub破除external dependency" data-url="http://yoursite.com/2016/03/17/使用stub破除external dependency/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -534,8 +463,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/blog.jpg"
@@ -578,6 +516,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#提高代码的可测试性"><span class="nav-number">1.</span> <span class="nav-text">提高代码的可测试性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A型方法：把具体类抽象成接口"><span class="nav-number">1.1.</span> <span class="nav-text">A型方法：把具体类抽象成接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B型方法：注入委托和接口（fake-implementation）"><span class="nav-number">1.2.</span> <span class="nav-text">B型方法：注入委托和接口（fake implementation）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#抽取接口方式"><span class="nav-number">1.2.1.</span> <span class="nav-text">抽取接口方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在构造函数中注入伪对象"><span class="nav-number">1.2.2.</span> <span class="nav-text">在构造函数中注入伪对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性注入"><span class="nav-number">1.2.3.</span> <span class="nav-text">属性注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法调用前注入伪对象"><span class="nav-number">1.2.4.</span> <span class="nav-text">方法调用前注入伪对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回stub的层次"><span class="nav-number">2.</span> <span class="nav-text">返回stub的层次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪造方法"><span class="nav-number">3.</span> <span class="nav-text">伪造方法</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -681,6 +630,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
