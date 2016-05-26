@@ -243,6 +243,135 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/24/Google Analystics 基础概念/" itemprop="url">
+                  Google Analystics 基础概念
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-24T12:50:57+08:00" content="2016-05-24">
+              2016-05-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/24/Google Analystics 基础概念/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/24/Google Analystics 基础概念/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>作为移动应用开发者，关注的是用户的痛点乃至用户在应用中的页面上花费的时间,这可以帮助你创建和调整应用,使其被更多的人分享和使用.</p>
+<p>默认情况下，当应用集成了Google Analytics后,Google Analytics可以提供如下的信息：</p>
+<p>User and session count<br>Session duration<br>Operating system information<br>Device model<br>Geographic location<br>除了包括统计信息外，还可以创建和使用以下操作来增强您的应用分析：</p>
+<p>Events<br>Goals<br>Ecommerce<br>Custom timings<br>Custom dimensions<br>Custom metrics<br>每一个这些附加功能都有助于更深入的了解应用程序。</p>
+<p>Events(事件)</p>
+<p>事件其实就是为对用户的客观行为的量化。例如用户点击了某个按钮这就是一个典型的事件。</p>
+<p>在Google Analystics中，事件由四个组件组成：</p>
+<p>Category<br>Action<br>Label (optional)<br>Value (optional)<br>Category 就是将需要被跟踪的行为归类后的集合。实际使用的时候，将被跟踪的actions归类更加容易处理和返回数据尤其是在现实report的时候。在使用Event时候必须要注意去track真正需要关心的东西，也就是说Event的集合必须是有具体含义的概念，假如只使用通用的集合，例如Visits，那么最后很可能只能得到大量没有衡量价值的信息。当然，如果想捕获更详细的事件可以使用类似“Visit-help”这种命名方式加以区分。</p>
+<p>action其实就是对于Category的细分，但同样属于事件核心概念的一部分，action的命名是基于用户正在执行的行为或用户开始或完成的任务。例如，一个action可以命名为“started,” “paused,” 或 “saving.”。需要注意的是因为action是对Category的细分，所以可以在不同的category下使用相同的action命名。这种灵活性允许在两个category下发生同一个action，但是在同一个category下不能发生重复的action。</p>
+<p>Label是一个用于要与类别和动作追踪附加信息的可选组件。Label可以用来传递系统信息，下载的信息，或者是触发事件的说明都可以。</p>
+<p>Value也是一个可选组件，与其它组件不同的是它是一个正整数值。这个值可以是任何你想要的整数值。例如，可以使用它作为一个计数器值，一个时间渲染值，或跟踪用户对一个特定的屏幕，视图停留的时间的值。</p>
+<p>下面是在游戏中跟踪事件的代码片段：</p>
+<p>// Event to track coin gathering mTracker.send(new HitBuilders.EventBuilder()<br>.setCategory(“Brackety Bricks”) .setAction(“Collect”) .setLabel(“coin”)<br>.setValue(1)<br>.build());<br>Goals</p>
+<p>目标是对于一种期望得到的客观结果。目标是自定义的，可能是包括页面访问，购买的行为，目标以及目标的完成期限紧密联系在一起的。 目标可以分为以下几种类型：</p>
+<p>Destination：用户已加载或访问一个特定的位置。<br>Duration：用户花费在一次会话中的最短时间。<br>Pages/Screens per session：用户访问或查看的页面的具体数量.<br>Event：一个特定的事件触发。<br>在Google Analystics 后台管理页面，提供了漏斗图去跟踪用户如何完成目标。漏斗图显示了网站和应用的用户流量和用户流出。所有的用户开始在漏斗的顶部，然后他们滤除，因为它们不能达到特定的目标，经过这层过滤得到的是最终完成目标的用户样本，而不是只给出一个“漏斗”形状，在报告中也显示了流量如何漏斗，通过转换成目标完成。</p>
+<p>仔细想想怎么去创建目标，因为Google Analystics只支持最多20个目标的设置。可以通过创建目标组的形式，将五个相关联的目标设置成一组。目标在Google Analystics上一旦创建就无法删除，但是可以通过修改的形式重新利用。需要注意的是，如果通过修改的方式可能会导致已生成的报告中的数据产生错乱。修改过的目标与过去是代表不同含义的，但是Google Analystics暂时不支持这种区分，在修改目标内容前，请再三确认。</p>
+<p>Ecommerce(电子商务)</p>
+<p>Ecommerce的功能加强包括对于商品的熟知度，促销，结账，退款以及其他采购过程的跟踪。由于生成Ecommerce报告的数据必须是客观存在的事实，因此Ecommerce必须要与Goals和Events联系在一起。 要在应用里跟踪购买产品的行为，须先创建一个产品并分配一个名称和价格，设置和ProductAction和分配事务ID，然后将建立的跟踪事件发送给谷歌Analytics（分析）。示例代码如下：</p>
+<p>// create the Product<br>Product product = new Product()<br>.setName(“Rocket Fuel”) .setPrice(10.00);<br>// set the ProductAction<br>ProductAction productAction = new ProductAction(ProductAction.ACTION_PURCHASE)<br>.setTransactionId(“T01701”);<br>// add the transaction to an Event<br>HitBuilders.EventBuilder builder = new HitBuilders.EventBuilder()<br>.setCategory(“In-Game Store”) .setAction(“Purchase”) .addProduct(product) .setProductAction(productAction);<br>// send the transaction data with the event mTracker.send(builder.build());<br>Custom Timings(自定义计时)</p>
+<p>Custom Timings 是用来衡量在应用里完成特定任务所需要的时间，Custom Timings和events从创建方式来说很类似，但是从时间角度来说又是不同的。下面的代码片段展示了如何创建跟踪用户需要多长时间在游戏中完成任务的Custom Timings的例子：</p>
+<p>// build and send a custom timing mTracker.send(new HitBuilders.TimingBuilder()<br>.setCategory(“Brackety Bricks”) .setValue(42000) // 42 seconds .setVariable(“First Stage”) .setLabel(“Race”)<br>.build());</p>
+<p>和创建跟踪Event非常类似，需要设置类别，价值和标签。不同的地方在于用Variable代替了Event中的action。正整数Value就是需要被记录的时间信息。</p>
+<p>Custom Dimensions</p>
+<p>Custom Dimensions 可以在创建的报告中进行一些维度划分，包括用户特征，标签，或者是满足设定条件的数据等。这种自定维度的数据跟踪和采集对于界定使用者的技能水平，及其选择的难度级别设置时大多数使用者参与游戏使用设备的型号很有帮助。 设置一个Custom Dimensions 需要在Google Analystics网站上配置一些基本的维度。这和设置Goals很类似，同样只有最多20个可设置的数量。 下面代码片段是增加一个显示当前级别’Brackety Bricks’的示例：</p>
+<p>// set a custom dimension to track level and difficulty mTracker.setScreen(“BracketyBricks”);<br>mTracker.send(new HitBuilders.ScreenViewBuilder()<br>.setCustomDimension(3, “Brackety Bricks”)<br>.build() );<br>Custom Metrics</p>
+<p>Custom Metrics 和 Custom dimensions很相似，都支持使用不同的域。Custom Metrics最好在创建难以在其他地方跟踪而不产生过多的错误数据的报告时使用。</p>
+<p>创建Custom Metrics是在管理设置中, 位于Google Analystics 网站的属性设置下的Custom Dimensions(自定义维度)的可选菜单里面,定义Custom Metrics 需要以下的参数：</p>
+<p>A name<br>A scope set to either Hit or Product<br>A formatting type of Integer, Currency, or Time<br>当然，在设置Custom Metrics时，可以选择性的设置想要收集值区间。下面的代码片段展示了 在’Brtackety Bricks’的一个级别下从一个view到一个提示页面的Custom Metrics报告.</p>
+<p>mTracker.setScreen(“BracketyBricks”); mTracker.send(new HitBuilders.ScreenViewBuilder()<br>.setCustomMetric(1, “Hint Page”)<br>.build() );<br>Summary</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/17/add-google-analystic-for-your-app/" itemprop="url">
                   在app中添加google analystic
                 </a>
@@ -686,7 +815,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
