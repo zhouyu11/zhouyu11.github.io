@@ -5,13 +5,17 @@
     
   <url>
     <loc>http://yoursite.com/2017/05/10/ThreadLocal%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2017-06-10T02:10:44.000Z</lastmod>
+    <lastmod>2017-06-10T02:12:03.000Z</lastmod>
     <data>
         <display>
         <title>ThreadLocal杂谈</title>
         <pubTime>2017-05-10T02:09:34.000Z</pubTime>
         
-        <tag>java thread threadLocal</tag>
+        <tag>java</tag>
+         
+        <tag>thread</tag>
+         
+        <tag>threadLocal</tag>
          
          
            
