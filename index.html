@@ -243,6 +243,118 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/10/ThreadLocal杂谈/" itemprop="url">
+                  ThreadLocal杂谈
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-10T10:09:34+08:00" content="2017-05-10">
+              2017-05-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/10/ThreadLocal杂谈/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/10/ThreadLocal杂谈/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ThreadLocal 是为多线程服务的。本质上ThreadLocal是一个关于创建线程局部变量的类。<br>通常情况下，我们创建的变量是可以被任何一个线程访问并修改的。而使用ThreadLocal创建的变量只能被当前线程访问，其他线程则无法访问和修改。举个例子， 服务器同时被100个用户访问，访问的时候需要对用户信息进行操作，这里threadLocal就可以用来对这100个用户信息进行thread级别的隔离。</p>
+<p>ThreadLocal是如何做到变量只能被当前线程访问呢？</p>
+<p>首先需要声明的是thread local是通过给thread创建变量副本的方式来存储变量的。这些需要被线程使用到的变量就是存储在thread对象的threadLocals属性上。</p>
+<p>这里又要提到ThreadLocalMap，这个是threadlocals的类型。从这个角度来看ThreadLocal类更像是一个util类，主要的职责就是帮助thread管理threadLocals属性。</p>
+<h3 id="变量存储"><a href="#变量存储" class="headerlink" title="变量存储"></a>变量存储</h3><p>利用threadlocal对象 set 变量到thread上时调用的set方法源码是通过获取当前thread上绑定的threadlocals属性的值来进行操作，最终所有的值真正存储的位置其实都在thread本身与threadlocal对象并无直接关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void set(T value) &#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    if (map != null)</span><br><span class="line">        map.set(this, value);</span><br><span class="line">    else</span><br><span class="line">        createMap(t, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再来看get方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public T get() &#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    if (map != null) &#123;</span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(this);</span><br><span class="line">        if (e != null) &#123;</span><br><span class="line">            @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">            T result = (T)e.value;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return setInitialValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的设计就有点意思了，首先先从thread上拿到了threadlocals属性，这是一个ThreadLocalMap类型的值，也是数据真实的存储位置。thread所关联的所有threadlocal其实都存在这个map的entry里，也就是说不管这个thread里持有了多少个threadlocal实例，变量副本存储的地方有且只有一个map的entry。</p>
+<p>每个Thread 维护一个 ThreadLocalMap 映射表，这个映射表的 key 是 ThreadLocal 实例本身，value 是真正需要存储的 Object。<br>也就是说 ThreadLocal 本身并不存储值，它只是作为一个 key 来让线程从 ThreadLocalMap 获取 value。值得注意的是图中的虚线，表示 ThreadLocalMap 是使用 ThreadLocal 的弱引用作为 Key 的，弱引用的对象在 GC 时会被回收。</p>
+<p><img src="http://7xjtfr.com1.z0.glb.clouddn.com/threadlocal.jpg" alt=""></p>
+<p>threadlocal的存在是为了帮助thread进行threadlocals属性的关于制定key（threadllocal其实就是threadlocalMap的key）的赋值和取值。多线程之间的threadlocal实例本身其实是共享的,所以使用的时候一般定义成static变量，达到thread间共享实例的目的。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/27/如何正确理解url，uri以及urn/" itemprop="url">
                   如何正确理解url，uri以及urn
                 </a>
@@ -808,7 +920,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -818,7 +930,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
