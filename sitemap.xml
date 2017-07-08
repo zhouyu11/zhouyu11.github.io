@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/07/05/jacoco%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E5%8F%8A%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95%E8%A6%86%E7%9B%96%E7%8E%87/</loc>
+    
+    <lastmod>2017-07-08T00:59:01.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/05/10/ThreadLocal%E6%9D%82%E8%B0%88/</loc>
     
     <lastmod>2017-06-10T02:12:03.000Z</lastmod>
