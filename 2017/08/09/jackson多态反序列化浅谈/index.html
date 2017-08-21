@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java,jackson,多态," />
 
 
 
@@ -84,15 +84,28 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yu's Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2016/05/index.html">
+<meta name="description" content="前一天在项目里使用了mongo的多态支持，十分好用，但是后台的问题是解决了，伴生的前端多态支持也是个问题。mongo基于morphia的多态支持是在写入mongo的entity时，在entity上补上了相应的className字段，jackson也有类似的处理。本文描述的主题就是基于jackson的反序列化多态问题。
+
+基于jackson 的JsonTypeInfo实现的反序列化多态
+
+jacks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jackson多态反序列化浅谈">
+<meta property="og:url" content="http://yoursite.com/2017/08/09/jackson多态反序列化浅谈/index.html">
 <meta property="og:site_name" content="Yu's Blog">
-<meta property="og:description">
+<meta property="og:description" content="前一天在项目里使用了mongo的多态支持，十分好用，但是后台的问题是解决了，伴生的前端多态支持也是个问题。mongo基于morphia的多态支持是在写入mongo的entity时，在entity上补上了相应的className字段，jackson也有类似的处理。本文描述的主题就是基于jackson的反序列化多态问题。
+
+基于jackson 的JsonTypeInfo实现的反序列化多态
+
+jacks">
+<meta property="og:updated_time" content="2017-08-21T11:31:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yu's Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="jackson多态反序列化浅谈">
+<meta name="twitter:description" content="前一天在项目里使用了mongo的多态支持，十分好用，但是后台的问题是解决了，伴生的前端多态支持也是个问题。mongo基于morphia的多态支持是在写入mongo的entity时，在entity上补上了相应的className字段，jackson也有类似的处理。本文描述的主题就是基于jackson的反序列化多态问题。
+
+基于jackson 的JsonTypeInfo实现的反序列化多态
+
+jacks">
 
 
 
@@ -110,7 +123,7 @@
   };
 </script>
 
-  <title> 归档 | Yu's Blog </title>
+  <title> jackson多态反序列化浅谈 | Yu's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -141,7 +154,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,140 +232,141 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 7 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/05/27/如何正确理解url，uri以及urn/" itemprop="url">
-              
-                <span itemprop="name">如何正确理解url，uri以及urn</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-27T17:58:17+08:00"
-              content="2016-05-27" >
-          05-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/05/24/Google Analystics 基础概念/" itemprop="url">
-              
-                <span itemprop="name">Google Analystics 基础概念</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-24T12:50:57+08:00"
-              content="2016-05-24" >
-          05-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/05/17/add-google-analystic-for-your-app/" itemprop="url">
-              
-                <span itemprop="name">在app中添加google analystic</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-17T21:57:57+08:00"
-              content="2016-05-17" >
-          05-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                jackson多态反序列化浅谈
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-08-09T18:54:02+08:00" content="2017-08-09">
+              2017-08-09
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/08/09/jackson多态反序列化浅谈/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/09/jackson多态反序列化浅谈/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前一天在项目里使用了mongo的多态支持，十分好用，但是后台的问题是解决了，伴生的前端多态支持也是个问题。mongo基于morphia的多态支持是在写入mongo的entity时，在entity上补上了相应的className字段，jackson也有类似的处理。本文描述的主题就是基于jackson的反序列化多态问题。</p>
+<blockquote>
+<p>基于jackson 的JsonTypeInfo实现的反序列化多态</p>
+</blockquote>
+<p>jackson本身提供了对多态反序列化的支持<a href="http://wiki.fasterxml.com/JacksonPolymorphicDeserialization" target="_blank" rel="external">JacksonPolymorphicDeserialization</a>，具体实现可以参考上述文档。</p>
+<p>这种方式在使用时和morphia的多态实现非常相似。但是不同的是morphia在将数据持久化到db中是就已经附带定义了实体数据的类型，而对于api之类而言是无法知道数据类型的，client端在数据传输时只能指定数据而无法给出具体数据类型。所以这种方式无法适用于依赖客户端创建的数据，纯粹由服务端管理创建的资源更加适用，因为服务端在跟client端交互时jackson会自动附加上类型值（只在序列化和反序列化中存在），这个值并不影响实体的使用。</p>
+<blockquote>
+<p>自定义JsonDeserializer</p>
+</blockquote>
+<p>另外一种稍微傻点的方式就是，自定义json Deserializer方式，好处就是可以随意管理反序列化和序列化方式。可以解决的第一种方法无法支持的创建时多态。恶心的点在于如何界定json属于指定的反序列化方式，第一种方式是在json中制定了类型，但是抱歉的时这里什么都没有。当然最不济的就是根据具体的属性名类反推类型，但是这样强行多态真的好么，直接依赖属性名，依赖一个还是多个，又新加了一个类，特有属性和别的一样怎么办？判断属性全不全来分辨具体类型？<br>一个讨巧的做法就是在创建资源是给定类型字符，这是没办法避免的一个步骤，不然就真的只能属性值判断了。还可以将deserilizer method使用多态定义到具体类里，这样使用起来也相对方便一点。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/jackson/" rel="tag">#jackson</a>
+          
+            <a href="/tags/多态/" rel="tag">#多态</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/05/jacoco集成测试及回归测试覆盖率/" rel="next" title="基于jacoco的集成测试及回归测试覆盖率">
+                <i class="fa fa-chevron-left"></i> 基于jacoco的集成测试及回归测试覆盖率
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -360,6 +374,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/08/09/jackson多态反序列化浅谈/"
+           data-title="jackson多态反序列化浅谈" data-url="http://yoursite.com/2017/08/09/jackson多态反序列化浅谈/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -379,8 +401,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/blog.jpg"
@@ -423,6 +454,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -526,11 +568,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
