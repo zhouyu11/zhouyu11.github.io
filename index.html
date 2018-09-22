@@ -327,7 +327,23 @@
 </ul>
 </li>
 </ul>
-<p><img src="/images/2-phase-commit.png" alt="2-phase-commit"></p>
+<p>二阶段提交示意图<br><img src="/images/2-phase-commit.png" alt="2-phase-commit"></p>
+<p>二阶段提交是一个很简单容易理解的协议，但是也存在一些问题。</p>
+<ul>
+<li><p>在两个阶段都可能出现各种原因导致服务器之间的通讯障碍问题：</p>
+<ul>
+<li><p>第一阶段的参与者出现问题<br>协调者会等待直到请求超时认为请求失败，这也会导致这次事务提交的失败。这里体现的问题就是容错性，二阶段提交没有很好的容错性机制，只能这种方式来保证。</p>
+</li>
+<li><p>第二阶段的参与者出现问题<br>事务提交的时候个别参与者没有收到commit请求，这也就意味着只有部分参与者成功执行事务。产生的问题就是各个参与者之间的数据不一致。</p>
+</li>
+<li><p>协调者出现问题<br>协调者是整个二阶段提交最重要的角色，协调者出现问题整个二阶段请求都没办法继续操作下去。特别是在阶段二出现问题的话会导致参与者处于事务锁定状态。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>二阶段提交的过程中，所有和此次事务相关的逻辑都处于阻塞状态，各个参与者处于相互等待状态下也无法进行其他操作。这也会带来事务处理的性能问题。</li>
+</ul>
 <h1 id="三阶段提交-3-phase-commit"><a href="#三阶段提交-3-phase-commit" class="headerlink" title="三阶段提交(3 phase commit)"></a>三阶段提交(3 phase commit)</h1><h1 id="Paxos协议"><a href="#Paxos协议" class="headerlink" title="Paxos协议"></a>Paxos协议</h1><h1 id="ZAB协议-Zookeeper-Automic-Brodcast"><a href="#ZAB协议-Zookeeper-Automic-Brodcast" class="headerlink" title="ZAB协议(Zookeeper Automic Brodcast)"></a>ZAB协议(Zookeeper Automic Brodcast)</h1>
           
         
