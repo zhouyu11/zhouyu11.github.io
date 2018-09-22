@@ -4,18 +4,16 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/08/09/jackson%E5%A4%9A%E6%80%81%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%85%E8%B0%88/</loc>
-    <lastmod>2017-08-21T11:31:42.000Z</lastmod>
+    <loc>http://yoursite.com/2017/08/31/Mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E5%92%8C%E5%8A%A0%E9%94%81%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2017-09-01T01:49:03.000Z</lastmod>
     <data>
         <display>
-        <title>jackson多态反序列化浅谈</title>
-        <pubTime>2017-08-09T10:54:02.000Z</pubTime>
+        <title>Mysql事务隔离和加锁处理</title>
+        <pubTime>2017-08-31T11:03:31.000Z</pubTime>
         
-        <tag>java</tag>
+        <tag>Mysql</tag>
          
-        <tag>jackson</tag>
-         
-        <tag>多态</tag>
+        <tag>事务，数据库锁</tag>
          
          
            
@@ -26,7 +24,7 @@
     
   <url>
     <loc>http://yoursite.com/2017/07/05/jacoco%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E5%8F%8A%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95%E8%A6%86%E7%9B%96%E7%8E%87/</loc>
-    <lastmod>2017-07-08T00:59:01.000Z</lastmod>
+    <lastmod>2017-08-31T11:04:48.000Z</lastmod>
     <data>
         <display>
         <title>基于jacoco的集成测试及回归测试覆盖率</title>
@@ -39,6 +37,27 @@
         <tag>JacocoAgent</tag>
          
         <tag>集成测试， 回归测试， 代码覆盖率</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/08/09/jackson%E5%A4%9A%E6%80%81%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%85%E8%B0%88/</loc>
+    <lastmod>2017-08-21T11:36:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>jackson多态反序列化浅谈</title>
+        <pubTime>2017-08-09T10:54:02.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>jackson</tag>
+         
+        <tag>多态</tag>
          
          
            
