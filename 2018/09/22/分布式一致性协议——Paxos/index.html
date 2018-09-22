@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,jackson,多态," />
+  <meta name="keywords" content="Paxos,分布式," />
 
 
 
@@ -84,28 +84,36 @@
 
 
 
-<meta name="description" content="前一天在项目里使用了mongo的多态支持，十分好用，但是后台的问题是解决了，伴生的前端多态支持也是个问题。mongo基于morphia的多态支持是在写入mongo的entity时，在entity上补上了相应的className字段，jackson也有类似的处理。本文描述的主题就是基于jackson的反序列化多态问题。
+<meta name="description" content="二阶段提交(2 phase commit)  二阶段提交是将事务分成两个阶段进行处理，阶段一 提交事务请求，阶段二执行事务请求。  整个过程中含有两个角色协调者和参与者，协调者发起事务请求，参与者执行。  二阶段提交的核心就是对每个事务请求都采取先尝试后提交的方式。
+一 提交事务请求（投票阶段）
+事务询问
+协调者向所有参与者发送事务内容，询问是否可以执事务，然后等待所有参与的回应。
 
-基于jackson 的JsonTypeInfo实现的反序列化多态
-
-jacks">
+事务执行
+参">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jackson多态反序列化浅谈">
-<meta property="og:url" content="http://yoursite.com/2017/08/09/jackson多态反序列化浅谈/index.html">
+<meta property="og:title" content="分布式一致性">
+<meta property="og:url" content="http://yoursite.com/2018/09/22/分布式一致性协议——Paxos/index.html">
 <meta property="og:site_name" content="Yu's Blog">
-<meta property="og:description" content="前一天在项目里使用了mongo的多态支持，十分好用，但是后台的问题是解决了，伴生的前端多态支持也是个问题。mongo基于morphia的多态支持是在写入mongo的entity时，在entity上补上了相应的className字段，jackson也有类似的处理。本文描述的主题就是基于jackson的反序列化多态问题。
+<meta property="og:description" content="二阶段提交(2 phase commit)  二阶段提交是将事务分成两个阶段进行处理，阶段一 提交事务请求，阶段二执行事务请求。  整个过程中含有两个角色协调者和参与者，协调者发起事务请求，参与者执行。  二阶段提交的核心就是对每个事务请求都采取先尝试后提交的方式。
+一 提交事务请求（投票阶段）
+事务询问
+协调者向所有参与者发送事务内容，询问是否可以执事务，然后等待所有参与的回应。
 
-基于jackson 的JsonTypeInfo实现的反序列化多态
-
-jacks">
-<meta property="og:updated_time" content="2017-08-21T11:36:56.000Z">
+事务执行
+参">
+<meta property="og:image" content="http://yoursite.com/images/2-phase-commit.png">
+<meta property="og:updated_time" content="2018-09-22T01:41:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jackson多态反序列化浅谈">
-<meta name="twitter:description" content="前一天在项目里使用了mongo的多态支持，十分好用，但是后台的问题是解决了，伴生的前端多态支持也是个问题。mongo基于morphia的多态支持是在写入mongo的entity时，在entity上补上了相应的className字段，jackson也有类似的处理。本文描述的主题就是基于jackson的反序列化多态问题。
+<meta name="twitter:title" content="分布式一致性">
+<meta name="twitter:description" content="二阶段提交(2 phase commit)  二阶段提交是将事务分成两个阶段进行处理，阶段一 提交事务请求，阶段二执行事务请求。  整个过程中含有两个角色协调者和参与者，协调者发起事务请求，参与者执行。  二阶段提交的核心就是对每个事务请求都采取先尝试后提交的方式。
+一 提交事务请求（投票阶段）
+事务询问
+协调者向所有参与者发送事务内容，询问是否可以执事务，然后等待所有参与的回应。
 
-基于jackson 的JsonTypeInfo实现的反序列化多态
-
-jacks">
+事务执行
+参">
+<meta name="twitter:image" content="http://yoursite.com/images/2-phase-commit.png">
 
 
 
@@ -123,7 +131,7 @@ jacks">
   };
 </script>
 
-  <title> jackson多态反序列化浅谈 | Yu's Blog </title>
+  <title> 分布式一致性 | Yu's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +261,7 @@ jacks">
             
             
               
-                jackson多态反序列化浅谈
+                分布式一致性
               
             
           </h1>
@@ -265,8 +273,8 @@ jacks">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-09T18:54:02+08:00" content="2017-08-09">
-              2017-08-09
+            <time itemprop="dateCreated" datetime="2018-09-22T08:29:49+08:00" content="2018-09-22">
+              2018-09-22
             </time>
           </span>
 
@@ -276,8 +284,8 @@ jacks">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/08/09/jackson多态反序列化浅谈/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/09/jackson多态反序列化浅谈/" itemprop="commentsCount"></span>
+                <a href="/2018/09/22/分布式一致性协议——Paxos/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/22/分布式一致性协议——Paxos/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -300,17 +308,41 @@ jacks">
       
 
       
-        <p>前一天在项目里使用了mongo的多态支持，十分好用，但是后台的问题是解决了，伴生的前端多态支持也是个问题。mongo基于morphia的多态支持是在写入mongo的entity时，在entity上补上了相应的className字段，jackson也有类似的处理。本文描述的主题就是基于jackson的反序列化多态问题。</p>
-<blockquote>
-<p>基于jackson 的JsonTypeInfo实现的反序列化多态</p>
-</blockquote>
-<p>jackson本身提供了对多态反序列化的支持<a href="http://wiki.fasterxml.com/JacksonPolymorphicDeserialization" target="_blank" rel="external">JacksonPolymorphicDeserialization</a>，具体实现可以参考上述文档。</p>
-<p>这种方式在使用时和morphia的多态实现非常相似。但是不同的是morphia在将数据持久化到db中是就已经附带定义了实体数据的类型，而对于api之类而言是无法知道数据类型的，client端在数据传输时只能指定数据而无法给出具体数据类型。所以这种方式无法适用于依赖客户端创建的数据，纯粹由服务端管理创建的资源更加适用，因为服务端在跟client端交互时jackson会自动附加上类型值（只在序列化和反序列化中存在），这个值并不影响实体的使用。</p>
-<blockquote>
-<p>自定义JsonDeserializer</p>
-</blockquote>
-<p>另外一种稍微傻点的方式就是，自定义json Deserializer方式，好处就是可以随意管理反序列化和序列化方式。可以解决的第一种方法无法支持的创建时多态。恶心的点在于如何界定json属于指定的反序列化方式，第一种方式是在json中制定了类型，但是抱歉的时这里什么都没有。当然最不济的就是根据具体的属性名类反推类型，但是这样强行多态真的好么，直接依赖属性名，依赖一个还是多个，又新加了一个类，特有属性和别的一样怎么办？判断属性全不全来分辨具体类型？<br>一个讨巧的做法就是在创建资源是给定类型字符，这是没办法避免的一个步骤，不然就真的只能属性值判断了。还可以将deserilizer method使用多态定义到具体类里，这样使用起来也相对方便一点。</p>
-
+        <h2 id="二阶段提交-2-phase-commit"><a href="#二阶段提交-2-phase-commit" class="headerlink" title="二阶段提交(2 phase commit)"></a>二阶段提交(2 phase commit)</h2><p>  二阶段提交是将事务分成两个阶段进行处理，阶段一 提交事务请求，阶段二执行事务请求。<br>  整个过程中含有两个角色协调者和参与者，协调者发起事务请求，参与者执行。<br>  二阶段提交的核心就是对每个事务请求都采取先尝试后提交的方式。</p>
+<h3 id="一-提交事务请求（投票阶段）"><a href="#一-提交事务请求（投票阶段）" class="headerlink" title="一 提交事务请求（投票阶段）"></a>一 提交事务请求（投票阶段）</h3><ul>
+<li><p>事务询问</p>
+<p>协调者向所有参与者发送事务内容，询问是否可以执事务，然后等待所有参与的回应。</p>
+</li>
+<li><p>事务执行</p>
+<p>参与者收到事务内容后，执行事务内容， 并将Undo和Redo的信息记入事务日志。</p>
+</li>
+<li><p>事务询问</p>
+<p>若参与者成功执行了事务，就反馈给协调者Yes，如果参与者没有成功执行事务则反馈No。</p>
+<p>整个第一阶段得到的结果就是 事务是否可以被执行。<br>Case有三种：</p>
+</li>
+<li>参与者全部回复Yes</li>
+<li>存在参与者返回No</li>
+<li>存在参与者没有回应</li>
+</ul>
+<h3 id="二-执行事务请求"><a href="#二-执行事务请求" class="headerlink" title="二 执行事务请求"></a>二 执行事务请求</h3><ul>
+<li>参与者全部回复Yes， 那么久Happy的可以通知参与者执行事务了<ul>
+<li>发送commit请求 到所以参与者</li>
+<li>参与者接收到commit 请求的时候，正式执行事务提交操作</li>
+<li>执行完了，发送Ack给协调者</li>
+<li>协调者收到Ack，事务结束</li>
+</ul>
+</li>
+<li><p>有参与者没有回复Yes<br>协调者在收到参与者返回的No或者参与者超时都没有返回时，就会直接触发事务中断的操作</p>
+<ul>
+<li>发送Rollback请求</li>
+<li>参与者执行Undo</li>
+<li>反馈Ack</li>
+<li>收到Ack，事务结束</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2-phase-commit.png" alt="2-phase-commit"></p>
+<h1 id="三阶段提交-3-phase-commit"><a href="#三阶段提交-3-phase-commit" class="headerlink" title="三阶段提交(3 phase commit)"></a>三阶段提交(3 phase commit)</h1><h1 id="Paxos协议"><a href="#Paxos协议" class="headerlink" title="Paxos协议"></a>Paxos协议</h1><h1 id="ZAB协议-Zookeeper-Automic-Brodcast"><a href="#ZAB协议-Zookeeper-Automic-Brodcast" class="headerlink" title="ZAB协议(Zookeeper Automic Brodcast)"></a>ZAB协议(Zookeeper Automic Brodcast)</h1>
       
     </div>
 
@@ -331,11 +363,9 @@ jacks">
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag">#java</a>
+            <a href="/tags/Paxos/" rel="tag">#Paxos</a>
           
-            <a href="/tags/jackson/" rel="tag">#jackson</a>
-          
-            <a href="/tags/多态/" rel="tag">#多态</a>
+            <a href="/tags/分布式/" rel="tag">#分布式</a>
           
         </div>
       
@@ -344,17 +374,13 @@ jacks">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/05/jacoco集成测试及回归测试覆盖率/" rel="next" title="基于jacoco的集成测试及回归测试覆盖率">
-                <i class="fa fa-chevron-left"></i> 基于jacoco的集成测试及回归测试覆盖率
+              <a href="/2017/08/31/Mysql事务隔离和加锁处理/" rel="next" title="Mysql事务隔离和加锁处理">
+                <i class="fa fa-chevron-left"></i> Mysql事务隔离和加锁处理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/31/Mysql事务隔离和加锁处理/" rel="prev" title="Mysql事务隔离和加锁处理">
-                Mysql事务隔离和加锁处理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -380,8 +406,8 @@ jacks">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/08/09/jackson多态反序列化浅谈/"
-           data-title="jackson多态反序列化浅谈" data-url="http://yoursite.com/2017/08/09/jackson多态反序列化浅谈/">
+      <div class="ds-thread" data-thread-key="2018/09/22/分布式一致性协议——Paxos/"
+           data-title="分布式一致性" data-url="http://yoursite.com/2018/09/22/分布式一致性协议——Paxos/">
       </div>
     
   </div>
@@ -465,7 +491,7 @@ jacks">
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二阶段提交-2-phase-commit"><span class="nav-number">1.</span> <span class="nav-text">二阶段提交(2 phase commit)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-提交事务请求（投票阶段）"><span class="nav-number">1.1.</span> <span class="nav-text">一 提交事务请求（投票阶段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-执行事务请求"><span class="nav-number">1.2.</span> <span class="nav-text">二 执行事务请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三阶段提交-3-phase-commit"><span class="nav-number"></span> <span class="nav-text">三阶段提交(3 phase commit)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Paxos协议"><span class="nav-number"></span> <span class="nav-text">Paxos协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ZAB协议-Zookeeper-Automic-Brodcast"><span class="nav-number"></span> <span class="nav-text">ZAB协议(Zookeeper Automic Brodcast)</span></a></div>
             
           </div>
         </section>
