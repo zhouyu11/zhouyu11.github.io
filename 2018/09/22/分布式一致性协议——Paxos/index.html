@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Paxos,分布式," />
+  <meta name="keywords" content="2PC,3PC,分布式，事务," />
 
 
 
@@ -85,34 +85,34 @@
 
 
 <meta name="description" content="二阶段提交(2 phase commit)  二阶段提交是将事务分成两个阶段进行处理，阶段一 提交事务请求，阶段二执行事务请求。  整个过程中含有两个角色协调者和参与者，协调者发起事务请求，参与者执行。  二阶段提交的核心就是对每个事务请求都采取先尝试后提交的方式。
-一 提交事务请求（投票阶段）
+一 提交事务请求
 事务询问
 协调者向所有参与者发送事务内容，询问是否可以执事务，然后等待所有参与的回应。
 
 事务执行
-参">
+参与者收到事务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分布式一致性">
+<meta property="og:title" content="分布式事务一致性">
 <meta property="og:url" content="http://yoursite.com/2018/09/22/分布式一致性协议——Paxos/index.html">
 <meta property="og:site_name" content="Yu's Blog">
 <meta property="og:description" content="二阶段提交(2 phase commit)  二阶段提交是将事务分成两个阶段进行处理，阶段一 提交事务请求，阶段二执行事务请求。  整个过程中含有两个角色协调者和参与者，协调者发起事务请求，参与者执行。  二阶段提交的核心就是对每个事务请求都采取先尝试后提交的方式。
-一 提交事务请求（投票阶段）
+一 提交事务请求
 事务询问
 协调者向所有参与者发送事务内容，询问是否可以执事务，然后等待所有参与的回应。
 
 事务执行
-参">
+参与者收到事务">
 <meta property="og:image" content="http://yoursite.com/images/2-phase-commit.png">
-<meta property="og:updated_time" content="2018-09-22T02:04:43.000Z">
+<meta property="og:updated_time" content="2018-09-22T07:01:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分布式一致性">
+<meta name="twitter:title" content="分布式事务一致性">
 <meta name="twitter:description" content="二阶段提交(2 phase commit)  二阶段提交是将事务分成两个阶段进行处理，阶段一 提交事务请求，阶段二执行事务请求。  整个过程中含有两个角色协调者和参与者，协调者发起事务请求，参与者执行。  二阶段提交的核心就是对每个事务请求都采取先尝试后提交的方式。
-一 提交事务请求（投票阶段）
+一 提交事务请求
 事务询问
 协调者向所有参与者发送事务内容，询问是否可以执事务，然后等待所有参与的回应。
 
 事务执行
-参">
+参与者收到事务">
 <meta name="twitter:image" content="http://yoursite.com/images/2-phase-commit.png">
 
 
@@ -131,7 +131,7 @@
   };
 </script>
 
-  <title> 分布式一致性 | Yu's Blog </title>
+  <title> 分布式事务一致性 | Yu's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +261,7 @@
             
             
               
-                分布式一致性
+                分布式事务一致性
               
             
           </h1>
@@ -309,7 +309,7 @@
 
       
         <h2 id="二阶段提交-2-phase-commit"><a href="#二阶段提交-2-phase-commit" class="headerlink" title="二阶段提交(2 phase commit)"></a>二阶段提交(2 phase commit)</h2><p>  二阶段提交是将事务分成两个阶段进行处理，阶段一 提交事务请求，阶段二执行事务请求。<br>  整个过程中含有两个角色协调者和参与者，协调者发起事务请求，参与者执行。<br>  二阶段提交的核心就是对每个事务请求都采取先尝试后提交的方式。</p>
-<h3 id="一-提交事务请求（投票阶段）"><a href="#一-提交事务请求（投票阶段）" class="headerlink" title="一 提交事务请求（投票阶段）"></a>一 提交事务请求（投票阶段）</h3><ul>
+<h3 id="一-提交事务请求"><a href="#一-提交事务请求" class="headerlink" title="一 提交事务请求"></a>一 提交事务请求</h3><ul>
 <li><p>事务询问</p>
 <p>协调者向所有参与者发送事务内容，询问是否可以执事务，然后等待所有参与的回应。</p>
 </li>
@@ -358,7 +358,67 @@
 <ul>
 <li>二阶段提交的过程中，所有和此次事务相关的逻辑都处于阻塞状态，各个参与者处于相互等待状态下也无法进行其他操作。这也会带来事务处理的性能问题。</li>
 </ul>
-<h1 id="三阶段提交-3-phase-commit"><a href="#三阶段提交-3-phase-commit" class="headerlink" title="三阶段提交(3 phase commit)"></a>三阶段提交(3 phase commit)</h1><h1 id="Paxos协议"><a href="#Paxos协议" class="headerlink" title="Paxos协议"></a>Paxos协议</h1><h1 id="ZAB协议-Zookeeper-Automic-Brodcast"><a href="#ZAB协议-Zookeeper-Automic-Brodcast" class="headerlink" title="ZAB协议(Zookeeper Automic Brodcast)"></a>ZAB协议(Zookeeper Automic Brodcast)</h1>
+<h2 id="三阶段提交-3-phase-commit"><a href="#三阶段提交-3-phase-commit" class="headerlink" title="三阶段提交(3 phase commit)"></a>三阶段提交(3 phase commit)</h2><p>三阶段请求是对二阶段提交协议的改进，将事务操作分成三个阶段</p>
+<blockquote>
+<p>一阶段</p>
+</blockquote>
+<ul>
+<li>Can Commit<ul>
+<li>协调者发起事务询问</li>
+<li>参与者回馈是否可以执行事务内容（在二阶段提交里，参与者在接到事务内容后先尝试执行，并保存Undo和Redo）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>二阶段</p>
+</blockquote>
+<p>根据 一阶段的阶段来进行后续操作，可能为Pre commit 或 中断事务</p>
+<ul>
+<li>Pre Commit<ul>
+<li>发起预提交请求 协调者发起请求并进入prepared状态</li>
+<li>预提交事务 尝试执行事务内容，记录Undo和Redo到事务日志</li>
+<li>向协调者发送事务执行响应 同时等待协调者后续操作命令（Commit or Abort） </li>
+</ul>
+</li>
+<li><p>中断事务<br> 有参与者一阶段返回了No或者没有响应</p>
+<ul>
+<li>发送Abort请求</li>
+<li>参与者中断事务 无论是收到协调者的Abort请求还是在等待协调者的过程中超时都会中断事务</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>三阶段</p>
+</blockquote>
+<p>这个阶段才会真正进行事务的提交</p>
+<ul>
+<li><p>Do Commit</p>
+<ul>
+<li>发送提交请求， 进入这个阶段，假设协调者处于正常工作状态并且接收到了所有参与者的预提交阶段的Ack消息。那么就向参与者发送 do commit请求。</li>
+<li>执行 事务提交操作，并在完成后释放事务占用资源。</li>
+<li>事务执行返程，向协调者发送Ack</li>
+<li>协调者收到Ack消息，完成事务</li>
+</ul>
+</li>
+<li><p>中断事务<br>协调者收到参与发送No或者在时限内没有收到所以参与者发送的反馈响应那么就中断事务</p>
+<ul>
+<li>发送中断请求， 向所有参与者发送Abort请求</li>
+<li>事务回滚 参与者收到Abort后，会执行事务的Undo操作，并在完成后释放事务占用资源</li>
+<li>反馈事务回滚结果 向协调者发送Ack</li>
+<li>中断事务 协调者收到所有参与者的Ack后，完成中断事务 </li>
+</ul>
+</li>
+</ul>
+<p>在阶段二完成后有可能出现一下问题：</p>
+<ul>
+<li>协调者出现问题</li>
+<li>协调者和参与者之间通信障碍</li>
+</ul>
+<p>无论是哪个问题都会导致参与者无法及时收到协调者发送的 do commit 或 abort请求。<br>对于这种情况在三阶段提交里，参与者会在超时后继续事务的提交。<br>所以有可能会出现数据不一致的情况，但是也解决了协调者单点故障的问题。</p>
+<h2 id="Paxos协议"><a href="#Paxos协议" class="headerlink" title="Paxos协议"></a>Paxos协议</h2><p>Paxos是一种基于消息传递的并具有高度容错性的一致性算法。</p>
+<p>那么Paxos到底解决了什么问题，这个问题可以用拜占庭将军作为场景描述：</p>
+<p>拜占庭帝国</p>
+<h2 id="ZAB协议-Zookeeper-Automic-Brodcast"><a href="#ZAB协议-Zookeeper-Automic-Brodcast" class="headerlink" title="ZAB协议(Zookeeper Automic Brodcast)"></a>ZAB协议(Zookeeper Automic Brodcast)</h2>
       
     </div>
 
@@ -379,9 +439,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Paxos/" rel="tag">#Paxos</a>
+            <a href="/tags/2PC/" rel="tag">#2PC</a>
           
-            <a href="/tags/分布式/" rel="tag">#分布式</a>
+            <a href="/tags/3PC/" rel="tag">#3PC</a>
+          
+            <a href="/tags/分布式，事务/" rel="tag">#分布式，事务</a>
           
         </div>
       
@@ -397,6 +459,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/27/http1-1里的keepalive/" rel="prev" title="http1.1里的keepalive">
+                http1.1里的keepalive <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -423,7 +489,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2018/09/22/分布式一致性协议——Paxos/"
-           data-title="分布式一致性" data-url="http://yoursite.com/2018/09/22/分布式一致性协议——Paxos/">
+           data-title="分布式事务一致性" data-url="http://yoursite.com/2018/09/22/分布式一致性协议——Paxos/">
       </div>
     
   </div>
@@ -468,7 +534,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -478,7 +544,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -507,7 +573,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二阶段提交-2-phase-commit"><span class="nav-number">1.</span> <span class="nav-text">二阶段提交(2 phase commit)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-提交事务请求（投票阶段）"><span class="nav-number">1.1.</span> <span class="nav-text">一 提交事务请求（投票阶段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-执行事务请求"><span class="nav-number">1.2.</span> <span class="nav-text">二 执行事务请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三阶段提交-3-phase-commit"><span class="nav-number"></span> <span class="nav-text">三阶段提交(3 phase commit)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Paxos协议"><span class="nav-number"></span> <span class="nav-text">Paxos协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ZAB协议-Zookeeper-Automic-Brodcast"><span class="nav-number"></span> <span class="nav-text">ZAB协议(Zookeeper Automic Brodcast)</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二阶段提交-2-phase-commit"><span class="nav-number">1.</span> <span class="nav-text">二阶段提交(2 phase commit)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-提交事务请求"><span class="nav-number">1.1.</span> <span class="nav-text">一 提交事务请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-执行事务请求"><span class="nav-number">1.2.</span> <span class="nav-text">二 执行事务请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三阶段提交-3-phase-commit"><span class="nav-number">2.</span> <span class="nav-text">三阶段提交(3 phase commit)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Paxos协议"><span class="nav-number">3.</span> <span class="nav-text">Paxos协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZAB协议-Zookeeper-Automic-Brodcast"><span class="nav-number">4.</span> <span class="nav-text">ZAB协议(Zookeeper Automic Brodcast)</span></a></li></ol></div>
             
           </div>
         </section>
