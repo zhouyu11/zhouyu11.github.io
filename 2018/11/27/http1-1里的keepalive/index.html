@@ -101,9 +101,9 @@
 服务端负载增加，每个请求过来都得占用端口
 客户端或服务端对客户端连接数的限制（chrome 限制是6个）  这种情况很多，比如网页加载对于这个case的处理就是使用将静态资源放置到不同Dom">
 <meta property="og:image" content="http://yoursite.com/images/http_basic_process.png">
-<meta property="og:image" content="http://yoursite.com/http_long_time_connection.png">
-<meta property="og:image" content="http://yoursite.com/http_mupltiple_request.png">
-<meta property="og:updated_time" content="2018-11-27T14:08:31.000Z">
+<meta property="og:image" content="http://yoursite.com/images/http_long_time_connection.png">
+<meta property="og:image" content="http://yoursite.com/images/http_mupltiple_request.png">
+<meta property="og:updated_time" content="2018-11-27T14:09:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http1.1里的keepalive">
 <meta name="twitter:description" content="http是现在web领域极其普遍的应用层传输协议， 目前常见的使用版本则是http1.1， 当然最先版本是http2.0。
@@ -314,11 +314,11 @@
 <li>服务端负载增加，每个请求过来都得占用端口</li>
 <li>客户端或服务端对客户端连接数的限制（chrome 限制是6个）<br>  这种情况很多，比如网页加载对于这个case的处理就是使用将静态资源放置到不同Domain或者压缩打包减少数量来提高效率</li>
 </ul>
-<p>http1.1 协议里增加了 keepalive的支持， 并且默认开启。<br><img src="http_long_time_connection.png" alt=""></p>
+<p>http1.1 协议里增加了 keepalive的支持， 并且默认开启。<br><img src="/images/http_long_time_connection.png" alt=""></p>
 <p>客户端和服务端在建立连接并完成request后并不会立即断开TCP连接，而是在下次request来临时复用这次TCP连接。但是这里也必须要有TCP连接的timeout时间限制。不然会造成服务端端口被长期占用释放不了。</p>
 <p>对于不适用keepalive的request来说，不管是客户端还是服务端都是通过TCP的链接的断开知道request的结束（TCP 挥手时会check 数据包的 seq， 保证数据完整性）。<br>支持keepalive后，如何知道request结束了呢？<br>在Http1.1的版本里， 解决方案是request 和reponse里使用contentLength来帮助确认是否收到全部数据。</p>
 <p>另一个问题就是在使用keepalive的情况，客户端依然有同时发送多个请求的情况，比如网页加载是需要同时load多个静态资源。比如 浏览器默认最大连接数是6，现在有十个资源同时加载，那么这十个里会有6个并行，4个与前6个串行。</p>
-<p>在keepalive里有个问题就是如果能知道每个repose与其对应的request的话，并发的请求可以只需要一次TCP连接，这也就是http2.0实现的多路复用。<br><img src="http_mupltiple_request.png" alt=""></p>
+<p>在keepalive里有个问题就是如果能知道每个repose与其对应的request的话，并发的请求可以只需要一次TCP连接，这也就是http2.0实现的多路复用。<br><img src="/images/http_mupltiple_request.png" alt=""></p>
 
       
     </div>
